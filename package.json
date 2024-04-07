@@ -7,7 +7,7 @@
     "dev": "node esbuild.config.mjs",
     "build": "node esbuild.config.mjs production"
   },
-  "keywords": [],
+  "keywords": [ ],
   "author": "",
   "license": "MIT",
   "devDependencies": {

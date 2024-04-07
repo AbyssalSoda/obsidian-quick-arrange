@@ -39,10 +39,12 @@ div.separator svg {
 .side-dock-ribbon div.separator svg {
   -webkit-mask-image: var(--up-indicator);
 }
+
 .side-dock-ribbon div.separator.is-collapsed.bt-sortable-chosen svg {
   /* so that the icon updates to show the expand icon on drag start */
   -webkit-mask-image: var(--up-indicator);
 }
+
 .side-dock-ribbon div.separator.is-collapsed svg {
   -webkit-mask-image: var(--down-indicator);
 }
@@ -57,13 +59,16 @@ div.separator svg {
   display: flex;
   align-self: flex-end;
 }
+
 .hider-ribbon .side-dock-ribbon div.separator svg {
   -webkit-mask-image: var(--left-indicator);
 }
+
 .hider-ribbon .side-dock-ribbon div.separator.is-collapsed.bt-sortable-chosen svg {
   /* so that the icon updates to show the expand icon on drag start */
   -webkit-mask-image: var(--left-indicator);
 }
+
 .hider-ribbon .side-dock-ribbon div.separator.is-collapsed svg {
   -webkit-mask-image: var(--right-indicator);
 }
@@ -82,7 +87,8 @@ div.separator svg {
 }
 
 .status-bar div.separator {
-  --cursor: grab; /* to deal with minimal theme */
+  /* to deal with minimal theme */
+  --cursor: grab;
   cursor: grab;
   padding: 0px 4px;
   display: flex;
@@ -119,6 +125,7 @@ body.is-dragging .tooltip {
 .workspace-tab-header-container.is-dragging .workspace-tab-container-after {
   background: none;
 }
+
 .workspace-tab-header-container.is-dragging .workspace-tab-header-inner-icon:hover {
   background: none;
 }
@@ -131,11 +138,11 @@ body.is-dragging .tooltip {
   display: block;
 }
 
-div.nav-action-button[data-sort-method] + div.nav-action-button.drag-to-rearrange {
+div.nav-action-button[data-sort-method]+div.nav-action-button.drag-to-rearrange {
   display: none;
 }
 
-div.nav-action-button[data-sort-method="custom"] + div.nav-action-button.drag-to-rearrange {
+div.nav-action-button[data-sort-method="custom"]+div.nav-action-button.drag-to-rearrange {
   display: block;
 }
 

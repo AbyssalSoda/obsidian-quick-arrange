@@ -2,14 +2,12 @@ import Fuse from "fuse.js";
 import { around } from "monkey-around";
 import {
   ChildElement,
-  Component,
   FileExplorerHeader,
   FileExplorerView,
   Platform,
   Plugin,
   RootElements,
   Scope,
-  setIcon,
   SplitDirection,
   TFolder,
   Vault,
@@ -21,14 +19,15 @@ import {
   WorkspaceSplit,
   WorkspaceTabs,
   requireApiVersion,
+  setIcon
 } from "obsidian";
 
 import Sortable, { MultiDrag } from "sortablejs";
 import { addSortButton, folderSort } from "./file-explorer/custom-sort";
 import { BartenderSettings, DEFAULT_SETTINGS, SettingTab } from "./settings/settings";
 import {
-  generateId,
   GenerateIdOptions,
+  generateId,
   getFn,
   getItems,
   getNextSiblings,

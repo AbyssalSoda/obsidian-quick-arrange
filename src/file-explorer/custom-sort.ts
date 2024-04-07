@@ -1,6 +1,5 @@
-import Fuse from "fuse.js";
-import {Menu, TAbstractFile, TFile, TFolder, requireApiVersion, FileExplorerView} from "obsidian";
-import {BartenderSettings} from "../settings/settings";
+import { Menu, TAbstractFile, TFile, TFolder, requireApiVersion } from "obsidian";
+import { BartenderSettings } from "../settings/settings";
 
 let Collator = new Intl.Collator(undefined, {
   usage: "sort",
