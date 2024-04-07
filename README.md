@@ -1,41 +1,60 @@
-## Obsidian Bartender
+# Obsidian Bartender
 
-Take control of your Obsidian workspace by organizing, rearranging, and filtering nav bars, ribbon bars, status bars, and the file explorer.
+This is a fork of [zansbang's fork](https://github.com/zansbang/obsidian-bartender)
+of [nothingislost's Obsidian Bartender](https://github.com/nothingislost/obsidian-bartender).
 
-### File Explorer
+Zansbang's fork incorporates PRs [53](https://github.com/nothingislost/obsidian-bartender/pull/53)/[56](https://github.com/nothingislost/obsidian-bartender/pull/56)
+to fix Bartender in Obsidian 1.5.3+.
 
-#### Filtering
+This fork simply publishes releases containing `styles.css` to allow proper installation using BRAT.
 
-The file explorer can be filtered using fuse.js extended search syntax:
+## Functionality
 
-White space acts as an **AND** operator, while a single pipe (`|`) character acts as an **OR** operator. To escape white space, use double quote ex. `="scheme language"` for exact match.
+The original README says that you can "organize, rearrange, and filter nav bars, ribbon bars, status bars, and the file explorer."
 
-| Token       | Match type                 | Description                            |
+From what I've observed, you can:
+
+- Reorder folders/files in the file explorer. (Finally.)
+- Use more advanced filters when searching through folders/files.
+- Rearrange elements in the status bar.
+- Organize elements in the status bar and ribbon bar into an auto-collapsible separator.
+
+### File Explorer Filtering
+
+The file explorer can be filtered using Fuse.js's extended search syntax:
+
+White space acts as an **AND** operator. To escape white space, use double quotes (e.g., `="scheme language"`) for exact match. A single pipe (`|`) character acts as an **OR** operator. 
+
+| Token       | Match Type                 | Description                            |
 | ----------- | -------------------------- | -------------------------------------- |
-| `jscript`   | fuzzy-match                | Items that fuzzy match `jscript`       |
-| `=scheme`   | exact-match                | Items that are `scheme`                |
-| `'python`   | include-match              | Items that include `python`            |
-| `!ruby`     | inverse-exact-match        | Items that do not include `ruby`       |
-| `^java`     | prefix-exact-match         | Items that start with `java`           |
-| `!^erlang` | inverse-prefix-exact-match | Items that do not start with `erlang` |
-| `.js$`      | suffix-exact-match         | Items that end with `.js`              |
-| `!.go$`     | inverse-suffix-exact-match | Items that do not end with `.go`       |
+| `jscript`   | fuzzy-match                | items that fuzzy match `jscript`       |
+| `=scheme`   | exact-match                | items that are `scheme`                |
+| `'python`   | include-match              | items that include `python`            |
+| `!ruby`     | inverse-exact-match        | items that do not include `ruby`       |
+| `^java`     | prefix-exact-match         | items that start with `java`           |
+| `!^erlang`  | inverse-prefix-exact-match | items that do not start with `erlang`  |
+| `.js$`      | suffix-exact-match         | items that end with `.js`              |
+| `!.go$`     | inverse-suffix-exact-match | items that do not end with `.go`       |
 
-White space acts as an **AND** operator, while a single pipe (`|`) character acts as an **OR** operator.
+## Installation
 
-### Installing the plugin using BRAT
+### Using BRAT
+
+This is the recommended method as you'll receive automatic updates.
 
 1. Install the BRAT plugin
-    1. Open `Settings` -> `Community Plugins`
-    2. Disable safe mode, if enabled
-    3. *Browse*, and search for "BRAT" 
-    4. Install the latest version of **Obsidian 42 - BRAT**
-2. Open BRAT settings (`Settings` -> `Obsidian 42 - BRAT`)
-    1. Scroll to the `Beta Plugin List` section
-    2. `Add Beta Plugin`
-    3. Specify this repository: `nothingislost/obsidian-bartender`
-3. Enable the `Bartender` plugin (`Settings` -> `Community Plugins`)
+    - Open `Settings` -> `Community plugins`
+    - Click `Browse`, and search for "BRAT"
+    - Install the latest version of BRAT
+2. Install the Bartender plugin
+    - Open `Settings` -> `BRAT`
+    - In the `Beta Plugin List` section, click `Add Beta plugin`
+    - Specify this repository: `TehBrian/obsidian-bartender`
+3. Enable the Bartender plugin
+    - Open `Settings` -> `Community plugins`
+    - In the `Installed plugins` section, enable the checkbox next to Bartender
+    - Restart Obsidian
 
-### Manually installing the plugin
+### Manually
 
-- Copy over `main.js`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/obsidian-bartender/`.
+Copy `main.js`, `styles.css`, and `manifest.json` into a folder inside your Obsidian vault's plugin folder (`VaultFolder/.obsidian/plugins/obsidian-bartender/...`).
