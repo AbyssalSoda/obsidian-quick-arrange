@@ -14,7 +14,7 @@ This project aims to clean up and provide up-to-date support for Obsidian Barten
 
 **Manual Method:** 
 
-Copy `main.js`, `styles.css`, and `manifest.json` into a folder inside your Obsidian vault's plugin folder (`VaultFolder/.obsidian/plugins/obsidian-quick-arrange/...`).
+- Copy `main.js`, `styles.css`, and `manifest.json` into a folder inside your Obsidian vault's plugin folder (`VaultFolder/.obsidian/plugins/obsidian-quick-arrange/...`).
 
 ## Quick Arrange Functionality
 
