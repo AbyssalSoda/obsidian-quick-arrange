@@ -1,7 +1,7 @@
 import { App, PluginSettingTab, Setting } from "obsidian";
-import BartenderPlugin from "../main";
+import QuickArrange from "../main";
 
-export interface BartenderSettings {
+export interface QArrangeSettings {
   statusBarOrder: string[];
   ribbonBarOrder: string[];
   fileExplorerOrder: Record<string, string[]>;
@@ -12,7 +12,7 @@ export interface BartenderSettings {
   sortOrder:string;
 }
 
-export const DEFAULT_SETTINGS: BartenderSettings = {
+export const DEFAULT_SETTINGS: QArrangeSettings = {
   statusBarOrder: [],
   ribbonBarOrder: [],
   fileExplorerOrder: {},
@@ -24,9 +24,9 @@ export const DEFAULT_SETTINGS: BartenderSettings = {
 };
 
 export class SettingTab extends PluginSettingTab {
-  plugin: BartenderPlugin;
+  plugin: QuickArrange;
 
-  constructor(app: App, plugin: BartenderPlugin) {
+  constructor(app: App, plugin: QuickArrange) {
     super(app, plugin);
     this.plugin = plugin;
   }

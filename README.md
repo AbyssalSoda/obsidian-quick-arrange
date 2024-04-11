@@ -1,25 +1,42 @@
-# Obsidian Bartender
+# Obsidian Quick Arrange (Early Development)
 
-This is a fork of [zansbang's fork](https://github.com/zansbang/obsidian-bartender)
-of [nothingislost's Obsidian Bartender](https://github.com/nothingislost/obsidian-bartender).
+**Like what I do?** Check out my other creative endeavors here: https://abyssalsoda.carrd.co/
 
-Zansbang's fork incorporates PRs [53](https://github.com/nothingislost/obsidian-bartender/pull/53)/[56](https://github.com/nothingislost/obsidian-bartender/pull/56)
-to fix Bartender in Obsidian 1.5.3+.
+This project aims to clean up and provide up-to-date support for Obsidian Bartender by cutting back on features and improving upon native functionality one might expect out of typical drag and drop file exploring.
 
-This fork simply publishes releases containing `styles.css` to allow proper installation using BRAT.
+**Note:** This project is forked/modified version of [nothingislost's Obsidian Bartender](https://github.com/nothingislost/obsidian-bartender) and incorporates aspects of other forked versions such as [zansbang's fork](https://github.com/zansbang/obsidian-QArrange).
 
-## Functionality
+## Installation
+
+**Current Method:**
+- Install it using [BRAT](https://github.com/TfTHacker/obsidian42-brat)
+  > Go to the Community Plugins tab in Obsidian settings and search for "BRAT" - install the plugin, then copy-paste the repository link for Quick Arrange in the `Add Beta plugin` section within the BRAT plugin settings.
+
+**Manual Method:** 
+
+Copy `main.js`, `styles.css`, and `manifest.json` into a folder inside your Obsidian vault's plugin folder (`VaultFolder/.obsidian/plugins/obsidian-quick-arrange/...`).
+
+## Quick Arrange Functionality
+
+**Current Functionality**
+- Allow users to drag and drop files between folders when sorting
+- Allow users to drag and drop folders and their contents when sorting to other folders
+- All other native Bartender functionality
+
+**Planned Removal:** 
+- Filters will be removed to allow focus on another plugin I might create called "Conditional Logic"
+
+
+## Former Bartender Functionality
 
 The original README says that you can "organize, rearrange, and filter nav bars, ribbon bars, status bars, and the file explorer."
 
-From what I've observed, you can:
-
-- Reorder folders/files in the file explorer. (Finally.)
-- Use more advanced filters when searching through folders/files.
+- Reorder folders/files in the file explorer (Idependently of one another only)
+- Use filters when searching through folders/files.
 - Rearrange elements in the status bar.
 - Organize elements in the status bar and ribbon bar into an auto-collapsible separator.
 
-### File Explorer Filtering
+### File Explorer Filtering (Soon to be depriciated)
 
 The file explorer can be filtered using Fuse.js's extended search syntax:
 
@@ -36,25 +53,5 @@ White space acts as an **AND** operator. To escape white space, use double quote
 | `.js$`      | suffix-exact-match         | items that end with `.js`              |
 | `!.go$`     | inverse-suffix-exact-match | items that do not end with `.go`       |
 
-## Installation
 
-### Using BRAT
 
-This is the recommended method as you'll receive automatic updates.
-
-1. Install the BRAT plugin
-    - Open `Settings` -> `Community plugins`
-    - Click `Browse`, and search for "BRAT"
-    - Install the latest version of BRAT
-2. Install the Bartender plugin
-    - Open `Settings` -> `BRAT`
-    - In the `Beta Plugin List` section, click `Add Beta plugin`
-    - Specify this repository: `TehBrian/obsidian-bartender`
-3. Enable the Bartender plugin
-    - Open `Settings` -> `Community plugins`
-    - In the `Installed plugins` section, enable the checkbox next to Bartender
-    - Restart Obsidian
-
-### Manually
-
-Copy `main.js`, `styles.css`, and `manifest.json` into a folder inside your Obsidian vault's plugin folder (`VaultFolder/.obsidian/plugins/obsidian-bartender/...`).

@@ -1,10 +1,22 @@
 {
-  "id": "obsidian-bartender",
-  "name": "Bartender",
+  "id": "obsidian-quick-arrange",
+  "name": "Quick Arrange",
   "version": "0.5.10",
   "minAppVersion": "1.2.0",
   "description": "Rearrange/organize the elements in the file explorer, status bar, and sidebar ribbon.",
-  "author": "NothingIsLost",
-  "authorUrl": "https://github.com/nothingislost",
+  "authors": [
+    {
+      "name": "NothingIsLost",
+      "url": "https://github.com/nothingislost"
+    },
+    {
+      "name": "AbyssalSoda",
+      "url": "https://github.com/AbyssalSoda"
+    },
+    {
+      "name": "Zansbang",
+      "url": "https://github.com/Zansbang"
+    }
+  ],
   "isDesktopOnly": false
 }

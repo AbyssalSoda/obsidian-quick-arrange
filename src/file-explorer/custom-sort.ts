@@ -1,5 +1,5 @@
 import { Menu, TAbstractFile, TFile, TFolder, requireApiVersion } from "obsidian";
-import { BartenderSettings } from "../settings/settings";
+import { QArrangeSettings } from "../settings/settings";
 
 let Collator = new Intl.Collator(undefined, {
   usage: "sort",
@@ -83,7 +83,7 @@ export const folderSort = function (order: string[], foldersOnBottom?: boolean) 
   }
 };
 
-export const addSortButton = function (settings:BartenderSettings, sorter: any, sortOption: any,setSortOrder:any,currentSort:any) {
+export const addSortButton = function (settings:QArrangeSettings, sorter: any, sortOption: any,setSortOrder:any,currentSort:any) {
   let plugin = this;
   let sortEl = this.addNavButton(
     SortGlyph,

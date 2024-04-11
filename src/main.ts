@@ -1,30 +1,9 @@
 import Fuse from "fuse.js";
 import { around } from "monkey-around";
-import {
-  ChildElement,
-  FileExplorerHeader,
-  FileExplorerView,
-  Platform,
-  Plugin,
-  RootElements,
-  Scope,
-  SplitDirection,
-  TFolder,
-  Vault,
-  View,
-  ViewCreator,
-  Workspace,
-  WorkspaceItem,
-  WorkspaceLeaf,
-  WorkspaceSplit,
-  WorkspaceTabs,
-  requireApiVersion,
-  setIcon
-} from "obsidian";
-
+import { ChildElement, FileExplorerHeader, FileExplorerView, Platform, Plugin, RootElements, Scope, SplitDirection, TFolder, TFile, TAbstractFile, Vault, View, ViewCreator, Workspace, WorkspaceItem, WorkspaceLeaf, WorkspaceSplit, WorkspaceTabs, requireApiVersion, setIcon } from "obsidian";
 import Sortable, { MultiDrag } from "sortablejs";
 import { addSortButton, folderSort } from "./file-explorer/custom-sort";
-import { BartenderSettings, DEFAULT_SETTINGS, SettingTab } from "./settings/settings";
+import { QArrangeSettings, DEFAULT_SETTINGS, SettingTab } from "./settings/settings";
 import {
   GenerateIdOptions,
   generateId,
@@ -43,12 +22,12 @@ const RIBBON_BAR_SELECTOR = "body > div.app-container div.side-dock-actions";
 const DRAG_DELAY = Platform.isMobile ? 200 : 200;
 const ANIMATION_DURATION = 500;
 
-export default class BartenderPlugin extends Plugin {
+export default class QuickArrange extends Plugin {
   statusBarSorter: Sortable;
   ribbonBarSorter: Sortable;
   fileSorter: Sortable;
   separator: HTMLElement;
-  settings: BartenderSettings;
+  settings: QArrangeSettings;
   settingsTab: SettingTab;
 
   async onload() {
@@ -225,7 +204,7 @@ export default class BartenderPlugin extends Plugin {
       })
     );
     this.registerEvent(
-      this.app.workspace.on("bartender-leaf-split", (originLeaf: WorkspaceItem, newLeaf: WorkspaceItem) => {
+      this.app.workspace.on("QArrange-leaf-split", (originLeaf: WorkspaceItem, newLeaf: WorkspaceItem) => {
         let element: HTMLElement = newLeaf.tabsInnerEl as HTMLElement;
         if (newLeaf.type === "tabs" && newLeaf instanceof WorkspaceTabs) {
           if (requireApiVersion && !requireApiVersion("0.15.3")) {
@@ -354,14 +333,14 @@ export default class BartenderPlugin extends Plugin {
             ...args
           ) {
             let result = old.call(this, source, newLeaf, direction, before, ...args);
-            this.trigger("bartender-leaf-split", source, newLeaf);
+            this.trigger("QArrange-leaf-split", source, newLeaf);
             return result;
           };
         },
         changeLayout(old: any) {
           return async function (workspace: any, ...args): Promise<void> {
             let result = await old.call(this, workspace, ...args);
-            this.trigger("bartender-workspace-change");
+            this.trigger("QArrange-workspace-change");
             return result;
           };
         },
@@ -647,31 +626,33 @@ export default class BartenderPlugin extends Plugin {
     if (!roots || !roots.length) return;
     for (let root of roots) {
       let el = root?.childrenEl;
-      if (!el) continue;
-      let draggedItems: HTMLElement[];
-      fileExplorer.hasCustomSorter = true;
-      let dragEnabled = document.body.querySelector("div.nav-action-button.drag-to-rearrange")?.hasClass("is-active")
-        ? true
-        : false;
-      root.sorter = Sortable.create(el!, {
-        group: "fileExplorer" + root.file.path,
-        forceFallback: true,
-        multiDrag: true,
-        // @ts-ignore
-        multiDragKey: "alt",
-        // selectedClass: "is-selected",
-        chosenClass: "bt-sortable-chosen",
-        delay: 0,
-        disabled: !dragEnabled,
-        sort: dragEnabled, // init with dragging disabled. the nav bar button will toggle on/off
-        animation: ANIMATION_DURATION,
-        onStart: evt => {
-          if (evt.items.length) {
-            draggedItems = evt.items;
-          } else {
-            draggedItems = [evt.item];
-          }
-        },
+        if (!el) continue;
+        let draggedItems: HTMLElement[];
+        fileExplorer.hasCustomSorter = true;
+        let dragEnabled = document.body.querySelector("div.nav-action-button.drag-to-rearrange")?.hasClass("is-active") ? true : false;
+        root.sorter = Sortable.create(el!, {
+          group: {
+            name: "fileExplorer",
+            pull: true,
+            put: true
+          },
+          forceFallback: true,
+          multiDrag: true,
+          // @ts-ignore
+          multiDragKey: "alt",
+          chosenClass: "bt-sortable-chosen",
+          delay: 0,
+          disabled: !dragEnabled,
+          sort: dragEnabled, // init with dragging disabled. the nav bar button will toggle on/off
+          animation: ANIMATION_DURATION,
+          onStart: evt => {
+              if (evt.items.length) {
+                  draggedItems = evt.items;
+              } else {
+                  draggedItems = [evt.item];
+              }
+          },
+
         onMove: evt => {
           // TODO: Refactor this
           // Responsible for updating the internal Obsidian array that contains the file item order
@@ -695,6 +676,27 @@ export default class BartenderPlugin extends Plugin {
           this.saveSettings();
           // return !adjacentEl.hasClass("nav-folder");
         },
+        
+        onAdd: async (evt) => {
+          const itemPathElement = evt.item.querySelector('.nav-file-title[data-path], .nav-folder-title[data-path]');
+          if (!itemPathElement) {
+            console.error("Dragged item does not contain a data-path attribute.");
+            return;
+          }
+        
+          const itemPath = itemPathElement.getAttribute('data-path');
+          const newFolderPath = root.file.path; // Assuming this is already the correct folder path
+        
+          if (!itemPath || !newFolderPath) {
+            console.error(`Invalid paths - Item Path: ${itemPath}, New Folder Path: ${newFolderPath}`);
+            return;
+          }
+        
+          // No need to split itemPath again, moveFile will handle it
+          await this.moveFile(itemPath, newFolderPath);
+        },
+        
+      
         onEnd: evt => {
           draggedItems = [];
           document.querySelector("body>div.drag-ghost")?.detach();
@@ -702,6 +704,39 @@ export default class BartenderPlugin extends Plugin {
       });
     }
   }
+
+
+  async moveFile(filePath: string, newFolderPath: string) {
+    const abstractFile = this.app.vault.getAbstractFileByPath(filePath);
+  
+    if (abstractFile instanceof TFile) {
+        // It's a file, move it.
+        const fileName = filePath.split('/').pop();
+        const newFilePath = `${newFolderPath}/${fileName}`;
+        try {
+            await this.app.vault.rename(abstractFile, newFilePath);
+        } catch (error) {
+            console.error("Error moving file:", error);
+        }
+    } else if (abstractFile instanceof TFolder) {
+        // It's a folder, move it.
+        const folderName = filePath.split('/').pop();
+        const newFolderFullPath = `${newFolderPath}/${folderName}`;
+        try {
+            await this.app.vault.rename(abstractFile, newFolderFullPath);
+        } catch (error) {
+            console.error("Error moving folder:", error);
+        }
+    } else {
+        console.error("Abstract file not found or unsupported type:", filePath);
+    }
+}
+
+  
+  
+  
+  
+
 
   getFileExplorer() {
     let fileExplorer: FileExplorerView | undefined = this.app.workspace.getLeavesOfType("file-explorer")?.first()
