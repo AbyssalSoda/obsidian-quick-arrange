@@ -2,7 +2,7 @@ import Fuse from "fuse.js";
 import { around } from "monkey-around";
 import { ChildElement, FileExplorerHeader, FileExplorerView, Platform, Plugin, RootElements, Scope, SplitDirection, TFolder, TFile, TAbstractFile, Vault, View, ViewCreator, Workspace, WorkspaceItem, WorkspaceLeaf, WorkspaceSplit, WorkspaceTabs, requireApiVersion, setIcon } from "obsidian";
 import Sortable, { MultiDrag } from "sortablejs";
-import { setupFileExplorerFilter } from "./filters";  // Assuming filters.ts is in the same directory
+import { setupFileExplorerFilter } from "./filters";  
 import { addSortButton, folderSort } from "./file-explorer/custom-sort";
 import { QArrangeSettings, DEFAULT_SETTINGS, SettingTab } from "./settings/settings";
 import {
@@ -643,12 +643,6 @@ export default class QuickArrange extends Plugin {
         console.error("Abstract file not found or unsupported type:", filePath);
     }
 }
-
-  
-  
-  
-  
-
 
   getFileExplorer() {
     let fileExplorer: FileExplorerView | undefined = this.app.workspace.getLeavesOfType("file-explorer")?.first()
