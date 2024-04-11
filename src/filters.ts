@@ -1,18 +1,13 @@
-import Fuse from "fuse.js";
 import { FileExplorerView } from "obsidian";
 import { getFn, getItems, highlight } from "./utils";
+import Fuse from "fuse.js";
 
-export function clearFileExplorerFilter(fileExplorer: FileExplorerView) {
-  let fileExplorerFilterEl: HTMLInputElement | null = document.body.querySelector(
-    '.workspace-leaf-content[data-type="file-explorer"] .search-input-container > input'
-  );
-  fileExplorerFilterEl && (fileExplorerFilterEl.value = "");
-  fileExplorer.tree.infinityScroll.filter = "";
-  fileExplorer.tree.infinityScroll.compute();
-}
+// Assuming 'around' is a utility function you may have elsewhere
+import { around } from "monkey-around"
 
-export const fileExplorerFilter = function (fileExplorer: FileExplorerView, requireApiVersion: any) {
-    const supportsVirtualChildren = requireApiVersion && requireApiVersion("0.15.0");
+export function fileExplorerFilter(this: any, fileExplorer: FileExplorerView, requireApiVersion: Function) {
+  if (!fileExplorer) return;
+  const supportsVirtualChildren = requireApiVersion("0.15.0");
 
   if (!fileExplorer) return;
   const _children = supportsVirtualChildren ? this.rootEl?.vChildren._children : this.rootEl?.children;
@@ -60,4 +55,40 @@ export const fileExplorerFilter = function (fileExplorer: FileExplorerView, requ
 
     this.filtered = false;
   }
-};
+}
+
+export function setupFileExplorerFilter(fileExplorer: FileExplorerView, plugin: any, settings: any, addSortButton: Function, requireApiVersion: Function) {
+  let InfinityScroll = fileExplorer.tree.infinityScroll.constructor;
+  plugin.register(
+    around(InfinityScroll.prototype, {
+      compute(old: any) {
+        return function (...args: any[]) {
+          try {
+            if (this.scrollEl.hasClass("nav-files-container")) {
+              fileExplorerFilter.call(this, fileExplorer, requireApiVersion);
+            }
+          } catch (err) {
+            console.error(err);
+          }
+          return old.call(this, ...args);
+        };
+      },
+    })
+  );
+
+  // Patching the addSortButton function
+  plugin.register(
+    around(fileExplorer.headerDom.constructor.prototype, {
+      addSortButton(old: any) {
+        return function (...args: any[]) {
+          if (this.navHeaderEl?.parentElement?.dataset?.type === "file-explorer") {
+            plugin.setFileExplorerFilter(this);  // Assumes setFileExplorerFilter is a method in your main plugin
+            return addSortButton.call(this, settings, ...args);
+          } else {
+            return old.call(this, ...args);
+          }
+        };
+      },
+    })
+  );
+}
