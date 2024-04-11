@@ -4,7 +4,7 @@
 
 This project aims to clean up and provide up-to-date support for Obsidian Bartender by cutting back on features and improving upon native functionality one might expect out of typical drag and drop file exploring.
 
-**Note:** This project is forked/modified version of [nothingislost's Obsidian Bartender](https://github.com/nothingislost/obsidian-bartender) and incorporates aspects of other forked versions such as [zansbang's fork](https://github.com/zansbang/obsidian-QArrange).
+**Note:** This project is a formerly forked/modified version of [nothingislost's Obsidian Bartender](https://github.com/nothingislost/obsidian-bartender) and incorporates aspects of other forked versions such as [zansbang's fork](https://github.com/zansbang/obsidian-QArrange).
 
 ## Installation
 
