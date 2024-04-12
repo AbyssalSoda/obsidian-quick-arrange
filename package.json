@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-qarrange",
+  "name": "quick-arrange",
   "version": "0.5.10",
   "description": "Allows for rearranging the elements in the status bar and sidebar ribbon",
   "main": "main.js",
