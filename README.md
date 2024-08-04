@@ -97,7 +97,7 @@ Users are able to move folders along with files interchangably & it works with t
 
 <details> 
 <summary> What current versions of obsidian are supported? </summary>
-1.6 to 1.6.7 at the moment
+1.5.8 to 1.6.7 at the moment
 </details>
 
 
