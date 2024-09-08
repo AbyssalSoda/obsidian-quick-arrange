@@ -54,8 +54,10 @@ A tool to clean up and enhance Obsidian Bartender, focusing on native drag-and-d
 ## Quick Arrange Functionality
 
 **Current Functionality:**
-- Allow users to drag and drop files between folders when sorting.
-- Allow users to drag and drop folders and their contents when sorting to other folders.
+- Allows users to drag and drop files between folders when sorting.
+- Allows users to drag and drop folders and their contents when sorting to other folders.
+- Allows users to customize drag & drop - as well as hover colors
+- Allows dual functionality between Obsidian and Quick Arrange drag and drop
 - All other native Bartender functionality.
 
 #### Planned Removal:
