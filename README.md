@@ -48,6 +48,7 @@ A tool to clean up and enhance Obsidian Bartender, focusing on native drag-and-d
 1. Install it using [BRAT](https://github.com/TfTHacker/obsidian42-brat).
 2. Go to the **Community Plugins** tab in Obsidian settings and search for "BRAT".
 3. Install the plugin, then copy-paste the repository link for Quick Arrange in the `Add Beta plugin` section within the BRAT plugin settings.
+4. ⚠️ Remember to restart Obsidian to apply the plugin
 
 **Manual Method:**
 1. Copy `main.js`, `styles.css`, and `manifest.json` into a folder inside your Obsidian vault's plugin folder (`VaultFolder/.obsidian/plugins/obsidian-quick-arrange/...`).
