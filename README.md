@@ -36,7 +36,7 @@ A tool to clean up and enhance Obsidian Bartender, focusing on native drag-and-d
 ## Versions
 `Obsidian 1.5.8` --> Release `v0.5.10`
 
-`Obsidian 1.6.7` --> **Today**
+`Obsidian 1.6.7` --> Release `v0.6.0`
 
 `Obsidian 1.7.1` ---> **In Progress**
 
