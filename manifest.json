@@ -1,8 +1,8 @@
 {
   "id": "quick-arrange",
   "name": "Quick Arrange",
-  "version": "v0.5.10",
-  "minAppVersion": "1.2.0",
+  "version": "v0.6.0",
+  "minAppVersion": "1.6.7",
   "description": "Rearrange/organize the elements in the file explorer, status bar, and sidebar ribbon.",
   "authors": [
     {
