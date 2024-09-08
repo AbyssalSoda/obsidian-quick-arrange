@@ -146,6 +146,29 @@ div.nav-action-button[data-sort-method="custom"]+div.nav-action-button.drag-to-r
   display: block;
 }
 
+
 .nav-files-container .sortable-fallback {
   display: none;
+}
+
+.nav-folder.sortable-drag,
+.nav-file.sortable-drag {
+  opacity: 0.5;
+  background-color: var(--background-secondary);
+}
+
+.nav-folder-children .is-dragging {
+  background-color: var(--background-primary-alt);
+}
+
+.nav-file-title, .nav-folder-title {
+  transition: transform 0.1s ease-in-out;
+}
+
+.is-being-dragged {
+  cursor: grabbing !important;
+}
+
+body.is-dragging * {
+  cursor: grabbing !important;
 }

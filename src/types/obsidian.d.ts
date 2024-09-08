@@ -2,6 +2,15 @@ import "obsidian";
 import Sortable from "sortablejs";
 
 declare module "obsidian" {
+
+  export interface ColorComponent extends ValueComponent<string> {
+    onChange(callback: (value: string) => any): this;
+  }
+
+  export interface Setting {
+    addColorPicker(cb: (component: ColorComponent) => any): this;
+  }
+  
   export interface Workspace extends Events {
     on(name: "status-bar-updated", callback: () => any, ctx?: any): EventRef;
     on(name: "ribbon-bar-updated", callback: () => any, ctx?: any): EventRef;
@@ -12,6 +21,7 @@ declare module "obsidian" {
       ctx?: any
     ): EventRef;
   }
+
   interface Vault {
     getConfig(config: String): unknown;
     setConfig(config: String, value: any): void;
@@ -41,4 +51,14 @@ declare module "obsidian" {
     recomputeChildrenDimensions(): void;
     updateDecorativeCurves(): void;
   }
+    interface App {
+        plugins: {
+            enabledPlugins: Set<string>;
+            disabledPlugins: Set<string>;
+            loadPlugin(pluginId: string): Promise<void>;
+            unloadPlugin(pluginId: string): Promise<void>;
+            enablePlugin(pluginId: string): Promise<void>;
+            disablePlugin(pluginId: string): Promise<void>;
+        };
+    }
 }

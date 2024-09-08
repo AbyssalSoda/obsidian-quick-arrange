@@ -53,11 +53,10 @@ export const folderSort = function (order: string[], foldersOnBottom?: boolean) 
   let fileExplorer = this.view,
     folderContents = this.file.children.slice();
   folderContents.sort(function (firstEl: TFile | TFolder, secondEl: TFile | TFolder) {
-    let firstIsFolder, secondIsFolder;
-    if (
-      foldersOnBottom &&
-      ((firstIsFolder = firstEl instanceof TFolder) || (secondIsFolder = secondEl instanceof TFolder))
-    ) {
+    let firstIsFolder = firstEl instanceof TFolder;
+    let secondIsFolder = secondEl instanceof TFolder;
+    
+    if (foldersOnBottom && (firstIsFolder || secondIsFolder)) {
       return firstIsFolder && !secondIsFolder
         ? 1
         : secondIsFolder && !firstIsFolder
@@ -66,8 +65,8 @@ export const folderSort = function (order: string[], foldersOnBottom?: boolean) 
     } else {
       if (!order) return Collator(firstEl.name, secondEl.name);
 
-      const index1 = order.indexOf(firstEl.path);
-      const index2 = order.indexOf(secondEl.path);
+      const index1 = order.indexOf(firstEl.name);
+      const index2 = order.indexOf(secondEl.name);
 
       return (index1 > -1 ? index1 : Infinity) - (index2 > -1 ? index2 : Infinity);
     }

@@ -10,6 +10,10 @@ export interface QArrangeSettings {
   autoHideDelay: number;
   dragDelay: number;
   sortOrder:string;
+
+  useOnlyCustomDragDrop: boolean;
+  dragDropColor: string;
+  hoverColor: string;
 }
 
 export const DEFAULT_SETTINGS: QArrangeSettings = {
@@ -20,7 +24,11 @@ export const DEFAULT_SETTINGS: QArrangeSettings = {
   autoHide: false,
   autoHideDelay: 2000,
   dragDelay: 200,
-    sortOrder: "alphabetical"
+    sortOrder: "alphabetical",
+
+  useOnlyCustomDragDrop: false,
+  dragDropColor: "#7F50E0", // Default purple color
+  hoverColor: "#E0E0E0",    // Default light gray color
 };
 
 export class SettingTab extends PluginSettingTab {
@@ -73,5 +81,43 @@ export class SettingTab extends PluginSettingTab {
           this.plugin.saveSettings();
         });
       });
+
+
+
+      new Setting(containerEl)
+        .setName("Use Only Custom Drag and Drop")
+        .setDesc("When enabled, only the plugin's smooth drag and drop will be used")
+        .addToggle(toggle => toggle
+            .setValue(this.plugin.settings.useOnlyCustomDragDrop)
+            .onChange(async (value) => {
+                this.plugin.settings.useOnlyCustomDragDrop = value;
+                this.plugin.updateDragDropBehavior();
+                await this.plugin.saveSettings();
+        }));
+
+
+      new Setting(containerEl)
+        .setName("Drag & Drop Color")
+        .setDesc("Set the color for dragged files and folders")
+        .addColorPicker(color => color
+            .setValue(this.plugin.settings.dragDropColor)
+            .onChange(async (value) => {
+                this.plugin.settings.dragDropColor = value;
+                this.plugin.aestheticsManager.updateDragDropColor(value);
+                await this.plugin.saveSettings();
+                this.plugin.aestheticsManager.updateStyles();
+            }));
+
+    new Setting(containerEl)
+        .setName("Hover Color")
+        .setDesc("Set the color for hovering over files and folders")
+        .addColorPicker(color => color
+            .setValue(this.plugin.settings.hoverColor)
+            .onChange(async (value) => {
+                this.plugin.settings.hoverColor = value;
+                this.plugin.aestheticsManager.updateHoverColor(value);
+                await this.plugin.saveSettings();
+                this.plugin.aestheticsManager.updateStyles();
+            }));
   }
 }

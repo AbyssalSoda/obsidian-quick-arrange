@@ -1,46 +1,80 @@
-# Obsidian Quick Arrange (Early Development)
+<h1 align="center">
+Obsidian Quick Arrange
+</h1>
 
-**Like what I do?** Check out my other creative endeavors here: https://abyssalsoda.carrd.co/
+<p align="center">
+A tool to clean up and enhance Obsidian Bartender, focusing on native drag-and-drop file exploration.
+</p>
 
-This project aims to clean up and provide up-to-date support for Obsidian Bartender by cutting back on features and improving upon native functionality one might expect out of typical drag and drop file exploring.
+<p align="center">
+ <a href="https://github.com/AbyssalSoda/obsidian-quick-arrange/releases"><img height="30px" src="https://img.shields.io/github/downloads/AbyssalSoda/obsidian-quick-arrange/total?color=brightgreen" alt="Downloads"></a>
+ <a href="https://github.com/AbyssalSoda/obsidian-quick-arrange/releases"><img height="30px" src="https://img.shields.io/github/v/release/AbyssalSoda/obsidian-quick-arrange?color=brightgreen" alt="Current Release"></a>
+ <a href="https://github.com/AbyssalSoda/obsidian-quick-arrange/issues"><img height="30px" src="https://img.shields.io/github/issues/AbyssalSoda/obsidian-quick-arrange?color=brightgreen" alt="Issues Badge"></a>
+</p>
+
+<p align="center">
+  <a href="#installation">Installation</a> •
+  <a href="#quick-arrange-functionality">Functionality</a> •
+  <a href="#support">Support</a> •
+  <a href="#faq">FAQ</a> •
+  <a href="#links">Links</a>
+</p>
+
+<p align="center">
+ <a href='https://ko-fi.com/I2I1TR6PC' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+</p>
+
+---
 
 **Note:** This project is formerly forked and modified version of [nothingislost's Obsidian Bartender](https://github.com/nothingislost/obsidian-bartender) and incorporates aspects of other forked versions such as [zansbang's fork](https://github.com/zansbang/obsidian-bartender).
+
+**⚠️ Caution:** This plugin is version specific and relies heavily on refreshing the file explorer. As such each release is version specific - please check which version of Obsidan corresponds to your version of Quick Arrange.
+
+---
+
+
+## Versions
+`Obsidian 1.5.8` --> Release `v0.5.10`
+
+`Obsidian 1.6.7` --> **Today**
+
+`Obsidian 1.7.1` ---> **In Progress**
 
 ## Installation
 
 **Current Method:**
-- Install it using [BRAT](https://github.com/TfTHacker/obsidian42-brat)
-  > Go to the Community Plugins tab in Obsidian settings and search for "BRAT" - install the plugin, then copy-paste the repository link for Quick Arrange in the `Add Beta plugin` section within the BRAT plugin settings.
+1. Install it using [BRAT](https://github.com/TfTHacker/obsidian42-brat).
+2. Go to the **Community Plugins** tab in Obsidian settings and search for "BRAT".
+3. Install the plugin, then copy-paste the repository link for Quick Arrange in the `Add Beta plugin` section within the BRAT plugin settings.
 
-**Manual Method:** 
+**Manual Method:**
+1. Copy `main.js`, `styles.css`, and `manifest.json` into a folder inside your Obsidian vault's plugin folder (`VaultFolder/.obsidian/plugins/obsidian-quick-arrange/...`).
 
-- Copy `main.js`, `styles.css`, and `manifest.json` into a folder inside your Obsidian vault's plugin folder (`VaultFolder/.obsidian/plugins/obsidian-quick-arrange/...`).
 
 ## Quick Arrange Functionality
 
-**Current Functionality**
-- Allow users to drag and drop files between folders when sorting
-- Allow users to drag and drop folders and their contents when sorting to other folders
-- All other native Bartender functionality
+**Current Functionality:**
+- Allow users to drag and drop files between folders when sorting.
+- Allow users to drag and drop folders and their contents when sorting to other folders.
+- All other native Bartender functionality.
 
-**Planned Removal:** 
-- Filters will be removed to allow focus on another plugin I might create called "Conditional Logic"
+#### Planned Removal:
+- Filters will be removed to allow focus on another plugin I might create called "Conditional Logic".
 
 
 ## Former Bartender Functionality
 
-The original README says that you can "organize, rearrange, and filter nav bars, ribbon bars, status bars, and the file explorer."
+The original README states that you can "organize, rearrange, and filter nav bars, ribbon bars, status bars, and the file explorer."
 
-- Reorder folders/files in the file explorer (Idependently of one another only)
+- Reorder folders/files in the file explorer (independently of one another only).
 - Use filters when searching through folders/files.
 - Rearrange elements in the status bar.
 - Organize elements in the status bar and ribbon bar into an auto-collapsible separator.
 
-### File Explorer Filtering (Soon to be depriciated)
-
+### File Explorer Filtering (Soon to be deprecated)
 The file explorer can be filtered using Fuse.js's extended search syntax:
 
-White space acts as an **AND** operator. To escape white space, use double quotes (e.g., `="scheme language"`) for exact match. A single pipe (`|`) character acts as an **OR** operator. 
+White space acts as an **AND** operator. To escape white space, use double quotes (e.g., `="scheme language"`) for exact match. A single pipe (`|`) character acts as an **OR** operator.
 
 | Token       | Match Type                 | Description                            |
 | ----------- | -------------------------- | -------------------------------------- |
@@ -52,6 +86,36 @@ White space acts as an **AND** operator. To escape white space, use double quote
 | `!^erlang`  | inverse-prefix-exact-match | items that do not start with `erlang`  |
 | `.js$`      | suffix-exact-match         | items that end with `.js`              |
 | `!.go$`     | inverse-suffix-exact-match | items that do not end with `.go`       |
+
+
+
+## Support
+
+- **Like what I do?** Check out my other creative endeavors [here](https://abyssalsoda.carrd.co/).
+- You can support the development of this plugin through donations:
+  - **Zelle:** 
+  - **Ko-fi:** [![Support Me on Ko-fi](https://img.shields.io/badge/Support%20Me%20on%20Ko--fi-blue)](https://ko-fi.com/AbyssalSoda)
+
+---
+
+## FAQ
+
+<details> 
+<summary> How does this differ from Obsidian Bartender? </summary>
+Users are able to move folders along with files interchangably & it works with the latest version of obsidian as of Obsidian v1. 6.7.
+</details>
+
+<details> 
+<summary> What current versions of obsidian are supported? </summary>
+1.5.8 to 1.6.7 at the moment
+</details>
+
+
+## Links
+
+- [GitHub Repository](https://github.com/AbyssalSoda/obsidian-quick-arrange)
+- [Releases](https://github.com/AbyssalSoda/obsidian-quick-arrange/releases)
+- [Author's GitHub](https://github.com/AbyssalSoda)
 
 
 
